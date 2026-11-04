@@ -329,8 +329,95 @@ body {
   opacity: 0.4;
 }
 
+/* ---- mobile menu ---- */
+/* On desktop the collapse wrapper is transparent to layout: its children
+   (nav-menu, nav-right) act as direct flex items of .nav, preserving the
+   original space-between layout. */
+.nav-collapse { display: contents; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-toggle-bar {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  margin: 0 auto;
+  background: var(--cream);
+  border-radius: 2px;
+  transition: transform .28s cubic-bezier(.2,.7,.2,1), opacity .18s ease;
+}
+.nav.open .nav-toggle-bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav.open .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav.open .nav-toggle-bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
 @media (max-width: 880px) {
-  .nav-menu { display: none; }
+  .nav-toggle { display: flex; }
+
+  .nav-collapse {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px 0 18px;
+    background: rgba(10, 10, 10, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+    box-shadow: 0 24px 40px -20px rgba(0, 0, 0, 0.9);
+    /* hidden until opened */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity .2s ease, transform .22s cubic-bezier(.2,.7,.2,1), visibility .2s;
+  }
+  .nav.open .nav-collapse {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    font-size: 17px;
+  }
+  .nav-menu li { display: block; }
+  .nav-menu a {
+    padding: 14px 24px;
+    border-radius: 0;
+  }
+  .nav-menu a:hover { opacity: 1; background: rgba(242, 235, 221, 0.05); }
+
+  .nav-right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    margin-top: 10px;
+    padding: 16px 24px 4px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .nav-right .lang-toggle { align-self: flex-start; }
+  .nav-right .btn-pill { justify-content: center; }
 }
 
 /* ============ Hero ============ */

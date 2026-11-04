@@ -72,25 +72,48 @@ function DiamondMark({ size = 22, color = "currentColor" }) {
 
 function Nav() {
   const { S } = useI18n();
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+
+  // Lock body scroll while the mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   return (
-    <nav className="nav">
-      <a href="#top" className="brand">
+    <nav className={"nav" + (open ? " open" : "")}>
+      <a href="#top" className="brand" onClick={close}>
         <img className="brand-logo" src="assets/mission-control-badge.png" alt="Mission Control" width="36" height="36" />
         <span>mission/control</span>
       </a>
-      <ul className="nav-menu">
-        <li><a href="#about">{S.nav.premise}</a></li>
-        <li><a href="#features"><span className="plus-i" /> {S.nav.features}</a></li>
-        <li><a href="#missions">{S.nav.missions}</a></li>
-        <li><a href="#team"><span className="plus-i" /> {S.nav.team}</a></li>
-        <li><a href="#labs">{S.nav.labs}</a></li>
-        <li><a href="#partners"><span className="plus-i" /> {S.nav.partners}</a></li>
-      </ul>
-      <div className="nav-right">
-        <LangToggle />
-        <a className="btn-pill" href={LACED_URL} target="_blank" rel="noreferrer">
-          <span className="plus-i" /> {S.nav.visit}
-        </a>
+
+      <button
+        className="nav-toggle"
+        aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
+        onClick={() => setOpen(o => !o)}
+      >
+        <span className="nav-toggle-bar" />
+        <span className="nav-toggle-bar" />
+        <span className="nav-toggle-bar" />
+      </button>
+
+      <div className="nav-collapse">
+        <ul className="nav-menu">
+          <li><a href="#about" onClick={close}>{S.nav.premise}</a></li>
+          <li><a href="#features" onClick={close}><span className="plus-i" /> {S.nav.features}</a></li>
+          <li><a href="#missions" onClick={close}>{S.nav.missions}</a></li>
+          <li><a href="#team" onClick={close}><span className="plus-i" /> {S.nav.team}</a></li>
+          <li><a href="#labs" onClick={close}>{S.nav.labs}</a></li>
+          <li><a href="#partners" onClick={close}><span className="plus-i" /> {S.nav.partners}</a></li>
+        </ul>
+        <div className="nav-right">
+          <LangToggle />
+          <a className="btn-pill" href={LACED_URL} target="_blank" rel="noreferrer" onClick={close}>
+            <span className="plus-i" /> {S.nav.visit}
+          </a>
+        </div>
       </div>
     </nav>
   );
