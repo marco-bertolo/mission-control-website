@@ -2394,6 +2394,32 @@ body {
 .chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 6px var(--blue); }
 .chip b { color: var(--cream); font-family: var(--font-display); letter-spacing: -0.005em; text-transform: none; font-size: 12px; font-weight: 500; }
 
+/* Inline year eyebrow — replaces the floating "2087 · EUROPA RETURN" chip
+   once the hero collapses to a single column (so it no longer sits on the
+   title). Hidden on desktop, where the floating chip is used instead. */
+.hero-eyebrow {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-bottom: 22px;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  background: rgba(10, 10, 10, 0.75);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.hero-eyebrow .icon { width: 14px; height: 14px; color: var(--blue); }
+
+@media (max-width: 1100px) {
+  .hero-chips { display: none; }
+  .hero-eyebrow { display: inline-flex; }
+}
+
 /* ============ Member system tags ============ */
 
 .member-tags {

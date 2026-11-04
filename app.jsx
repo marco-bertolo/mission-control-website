@@ -197,6 +197,10 @@ function Hero() {
     <section id="top" className="hero" data-screen-label="00 Hero">
       <div className="hero-grid">
         <div>
+          <div className="hero-eyebrow">
+            <span className="icon"><Icons.Globe/></span>
+            <span>{S.hero.chipYear}</span>
+          </div>
           <h1 className="headline">
             {fmt(S.hero.title)}
           </h1>
