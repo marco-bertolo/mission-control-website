@@ -1,0 +1,22 @@
+# Scratch / working folders — not part of the published site
+uploads/
+screenshots/
+
+# Legacy v1 prototype (superseded by the current site)
+Mission Control v1.html
+app.v1.jsx
+styles.v1.css
+
+# Original authoring copy (published as index.html instead)
+Mission Control.html
+
+# Local design/preview artifacts
+.thumbnail
+*.docx
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+*.swp
+.vscode/
+.idea/
